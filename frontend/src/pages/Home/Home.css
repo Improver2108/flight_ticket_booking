@@ -1,0 +1,13 @@
+.Home {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    height:100vh;
+    justify-content: center;
+}
+#welcome{
+    font-size: 120px;
+}
+#homeButtons>button{
+    margin:20px;
+}

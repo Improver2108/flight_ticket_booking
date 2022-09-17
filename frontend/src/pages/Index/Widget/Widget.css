@@ -1,0 +1,91 @@
+.widget{
+    background-color: rgb(244, 67, 13);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.booking-widget{
+    display: flex;
+    background-color: #fff;
+    margin:5px 15px 0;
+    border-radius: 4px;
+    font-size: 17px;
+}
+
+.booking-widget{
+    padding: 0px 15px;
+}
+
+.from-destination-container,.to-destination-container{
+    width: 170px;
+    border-right: 1px solid #e7e7e7;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+
+.to-destination-container{
+    margin-right: 10px;
+}
+
+.destination{
+    padding: 20px 0px;
+}
+
+.dates{
+    width: 145px;
+    border-right: 1px solid #e7e7e7;
+    margin-right: 10px;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.plus-button{
+    background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
+    position: absolute;
+    cursor: pointer;
+    margin-left: 17px;
+    background-position: -101px -41px;
+    width: 17px;
+    height: 18px;
+}
+
+.return-date{
+    color: #767676;
+}
+
+.flight-details{
+    width: 190px;
+    padding: 20px 8px 20px 0;
+}
+
+.details-submission{
+    display: flex;
+    width: 110px;
+    padding: 16px 0;
+}
+.details-submission>button{
+    font-size: 13px;
+    color: #111111;
+    padding: 4px 30px;
+    background-color: rgb(192, 145, 27);
+    border-radius: 2px;
+    border: none;
+}
+
+.main-text{
+    padding-left:15px;
+    vertical-align: top;
+    line-height: 21px;
+    width: 110px;
+}
+
+.mini-text,.day-text{
+    padding: 2px 5px;
+    font-size: 11px;
+    color: #767676;
+}
+
+.mini-text{
+    border: 1px solid #ccc; 
+}
