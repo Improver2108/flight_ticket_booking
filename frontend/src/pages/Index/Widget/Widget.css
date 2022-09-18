@@ -71,6 +71,12 @@
     background-color: rgb(192, 145, 27);
     border-radius: 2px;
     border: none;
+    cursor: pointer;
+}
+
+.details-submission>button:active{
+    transform: scale(0.98);
+    background-color: rgb(157, 120, 26);
 }
 
 .main-text{
