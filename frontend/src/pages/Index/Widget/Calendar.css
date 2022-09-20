@@ -4,3 +4,46 @@
     overflow: hidden;
     padding: 10px;
 }
+
+.left-slider{
+    opacity: .4;
+    background-color: transparent;
+    left: 8px;
+}
+
+.right-slider{
+    opacity:.4;
+    background-color: transparent;
+    right: -3px;
+}
+
+.left-slider,.right-slider{
+    position: absolute;
+    top:11px;
+    padding:0;
+    border: 0;
+    z-index: 1;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.left-slider-layout{
+    background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
+    width: 10px;
+    height: 14px;
+    background-position: -34px -94px;
+}
+
+.right-slider-layout{
+    background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
+    width: 10px;
+    height: 14px;
+    background-position: 65px -94px;
+}
+
+.left-slider-layoutm.right-slider-layout{
+    display: inline-block;
+    margin: 0 auto;
+}
