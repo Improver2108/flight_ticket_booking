@@ -10,7 +10,7 @@ const Calendar =()=>{
             </button>
             <button className="right-slider">
                 <div className="right-slider-layout"></div>
-            </button>
+            </button>         
         </div>
     );
 }
