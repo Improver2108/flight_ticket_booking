@@ -5,6 +5,18 @@
     padding: 10px;
 }
 
+.left-slider,.right-slider{
+    position: absolute;
+    top:11px;
+    padding:0;
+    border: 0;
+    z-index: 1;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
 .left-slider{
     opacity: .4;
     background-color: transparent;
@@ -17,17 +29,13 @@
     right: -3px;
 }
 
-.left-slider,.right-slider{
-    position: absolute;
-    top:11px;
-    padding:0;
-    border: 0;
-    z-index: 1;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    cursor: pointer;
+
+
+.left-slider-layoutm.right-slider-layout{
+    display: inline-block;
+    margin: 0 auto;
 }
+
 
 .left-slider-layout{
     background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
@@ -43,10 +51,6 @@
     background-position: 65px -94px;
 }
 
-.left-slider-layoutm.right-slider-layout{
-    display: inline-block;
-    margin: 0 auto;
-}
 
 .inner-calendar-layout{
     z-index: 2;
@@ -59,6 +63,37 @@
    height: 353px;
    padding: 0 10px;
    box-sizing: border-box;
+}
+
+.month-name{
+    padding: 10px 15px;
+}
+
+.month-name>p{
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.weeks{
+    margin-top: 12px;
+    display: flex;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+
+.weekdays,.weekends{
+    color: #555;
+    padding: 8px;
+    flex: 0 0 52px;
+    box-sizing: border-box;
+    font-size: 11px;
+    text-align: center;
+}
+.weekends{
+    color: #f5a623;
+    background-color: #fff5e8;
 }
 
 .price-information{
@@ -77,6 +112,7 @@
     position: relative;
     padding-left: 15px;
     color: #2b2b2b;
-    font-size: 14px;
+    font-size: 13px;
     vertical-align: top;
 }
+
