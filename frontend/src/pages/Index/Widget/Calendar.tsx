@@ -2,12 +2,40 @@ import React from "react";
 import { DateTime } from "luxon";
 import './Calendar.css'
 
-const Calendar = () => {
+const Dates = ({ counter }: any) => {
     const lisWeekdays: any = ["MON", "TUE", "WED", "THU", "FRI"].map(weekday => <div className="weekdays">{weekday}</div>);
     const lisWeekends: any = ["SAT", "SUN"].map(weekend => <div className="weekends">{weekend}</div>);
-    let date = DateTime.now();
+    const date = DateTime.now().plus({ months: counter });
+    const totalDays = date.daysInMonth;
+    const dates = [<div className={(counter === 0 && 1 < date.day) ? 'blackout-dates' : ''} style={{ gridColumnStart: date.startOf('month').weekday }}>1</div>]
+    for (let i = 2; i <= totalDays; i++) {
+        if (counter === 0 && i < date.day)
+            dates.push(<div className="blackout-dates">{i}</div>)
+        else
+            dates.push(<div>{i}</div>)
+    }
 
-    
+
+    return (
+        <div className="calendar-dates">
+            <div className="month-name">
+                <p>{date.toLocaleString({ month: "long", year: "numeric" })}</p>
+            </div>
+            <div className="weeks">
+                {lisWeekdays}
+                {lisWeekends}
+            </div>
+            <div className="day-number">
+                <div className="weekend-dates"></div>
+                <div className="day-grid">
+                    {dates.map(date => <>{date}</>)}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Calendar = () => {
 
     return (
         <div className="calendar-container">
@@ -19,44 +47,10 @@ const Calendar = () => {
             </button>
             <div className="calendar-layout">
                 <div className="inner-calendar-layout">
-                    <div className="calendar-dates">
-                        <div className="month-name">
-                            <p>{date.toLocaleString({ month: "long", year: "numeric" })}</p>
-                        </div>
-                        <div className="weeks">
-                            {lisWeekdays}
-                            {lisWeekends}
-                        </div>
-                        <div className="day-number">
-                            <div className="weekend-dates"></div>
-                            <div className="day-grid">
-                                <div className="day-start">1</div>
-                                <div>2</div>
-                                <div>3</div>
-                                <div>4</div>
-                                <div>5</div>
-                                <div>6</div>
-                                <div>7</div>
-                                <div>8</div>
-                                <div>9</div>
-                                <div>10</div>
-                                <div>11</div>
-                                <div>12</div>
-                                <div>13</div>
-                                <div>14</div>
-                            </div>                            
-                        </div>
-                    </div>
-
-                    <div className="calendar-dates">
-                        <div className="month-name">
-                            <p>{date.plus({ months: 1 }).toLocaleString({ month: "long", year: "numeric" })}</p>
-                        </div>
-                        <div className="weeks">
-                            {lisWeekdays}
-                            {lisWeekends}
-                        </div>
-                    </div>
+                    <Dates counter={0}></Dates>
+                    <Dates counter={1}></Dates>
+                    <Dates counter={2}></Dates>
+                    <Dates counter={3}></Dates>
                 </div>
             </div>
             <div className="price-information">
