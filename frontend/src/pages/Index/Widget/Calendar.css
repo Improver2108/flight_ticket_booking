@@ -21,19 +21,19 @@
 .left-slider {
     opacity: .4;
     background-color: transparent;
-    left: 8px;
+    left: 14px;
 }
 
 .right-slider {
     opacity: .4;
     background-color: transparent;
-    right: -3px;
+    right: 14px;
 }
 
 
 
-.left-slider-layoutm.right-slider-layout {
-    display: inline-block;
+.left-slider-layout,
+.right-slider-layout {
     margin: 0 auto;
 }
 
@@ -54,9 +54,8 @@
 
 
 .inner-calendar-layout {
-    z-index: 2;
     display: flex;
-    position: relative;
+    transition: transform .3s ease;
 }
 
 .calendar-dates {
@@ -68,6 +67,8 @@
 
 .month-name {
     padding: 10px 15px;
+    z-index: 0;
+    position: relative;
 }
 
 .month-name>p {
