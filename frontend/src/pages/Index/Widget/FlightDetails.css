@@ -1,0 +1,102 @@
+.flight-info{
+    width:531px;
+    background-color: #f2f2f2;
+}
+
+.flight-info-heading{
+    padding: 10px 15px;
+}
+
+.flight-info-heading>p{
+    margin: 0; 
+    font-size: 17px;
+    font-weight: 700 ;
+}
+
+.passengers{
+    display: flex;
+    border-bottom: 1px solid #f2f2f2f2;
+    background-color: #ffffff;
+    padding: 10px 15px;    
+}
+
+.passengers-types{
+    margin-right: 2%;
+    width: 40.448%;
+}
+
+.pt-name{
+    margin: 0px 0px 4px;
+    font-size: 13px;
+}
+
+.pt-info{
+    font-size: 12px;
+    color: #555555;
+    margin: 0;
+    width: 100%;
+}
+
+.p-count{
+    padding-left: 40px;
+    width: 57.448%;
+    margin-right: 0px;
+    margin-top: 14px;
+}
+
+.pc-style{
+    width:24px;
+    height: 24px;
+    border: none;
+    color: #555;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.pc-style:active,.pc-click{
+    border: 1px solid orange;
+}
+
+.radio-inputs{
+    padding-top: 5px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.ri-coaches{
+    position: relative;
+    padding: 11px 0;
+    margin-bottom: 5px;
+    margin-left:14px;
+    margin-right: 14px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.ric-select{
+    vertical-align: top;
+    position: relative;
+    bottom:2px;
+    width: 0px;
+    height: 0px;
+    z-index: -1;
+}
+
+.ric-radio{
+    position: absolute;
+    left:-2px;
+    top: 7px;
+    background-image: url(https://drfnx177dcte2.cloudfront.net/images/amoeba_icons.8a544b79.png);
+    width: 26px;
+    height: 26px;
+    background-position: -92px -140px;
+}
+
+.ric-radio:hover{
+    background-position: -147px -93px;
+}
+
+.ri-coaches>label>span{
+    padding-left: 20px;
+    vertical-align: text-bottom;
+}

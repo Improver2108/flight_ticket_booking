@@ -1,9 +1,3 @@
-.widget{
-    background-color: rgb(244, 67, 13);
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
 
 .booking-widget{
     display: flex;
@@ -20,6 +14,7 @@
     padding: 0px;
     outline: none;
     box-shadow: none;
+    width: 100%;
 }
 
 .booking-widget{
@@ -51,7 +46,7 @@
 }
 
 
-.calender-container{
+.details-container{
     position: absolute;
     z-index: 1;
     border-radius: 4px;
@@ -59,6 +54,17 @@
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 50%);
     background-color: #fff;
 }
+
+.details-arrows{
+    position: absolute;
+    background-color: inherit;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    top:-10px;
+    box-shadow: -1px -1px 0 rgb(0 0 0 / 10%);
+}
+
 
 .plus-button{
     background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
@@ -77,6 +83,7 @@
 .flight-details{
     width: 190px;
     padding: 20px 8px 20px 0;
+    position: relative;
 }
 
 .details-submission{

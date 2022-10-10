@@ -1,4 +1,4 @@
-.calendar-container {
+.container {
     height: 390px;
     width: 766px;
     overflow: hidden;
@@ -157,3 +157,4 @@
     font-size: 13px;
     vertical-align: top;
 }
+

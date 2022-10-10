@@ -1,5 +1,6 @@
 import React from "react";
 import Widget from './Widget/Widget'
+import './Index.css'
 // import Detail from "./Details/Details";
 
 

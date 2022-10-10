@@ -15,7 +15,6 @@ const Dates = ({ counter }: any) => {
             dates.push(<div>{i}</div>)
     }
 
-
     return (
         <div className="calendar-dates">
             <div >
@@ -39,42 +38,46 @@ const Dates = ({ counter }: any) => {
 
 const Calendar = () => {
 
-    const [shift,setShift]=useState(0);
-    const translateX:string="translateX("+shift+"px)";
-    const rightSlider = (e:any)=>{
-        if(shift!== -768*3)
-            setShift(preShift=>preShift-768);
+    const [shift, setShift] = useState(0);
+    const translateX: string = "translateX(" + shift + "px)";
+    const rightSlider = (e: any) => {
+        if (shift !== -768 * 3)
+            setShift(preShift => preShift - 768);
     }
 
-    const leftSlider =(e:any)=>{
-        if(shift!==0)
-            setShift(preShift=>preShift+768);
+    const leftSlider = (e: any) => {
+        if (shift !== 0)
+            setShift(preShift => preShift + 768);
     }
 
     return (
-        <div className="calendar-container">
-            <button className="left-slider" onClick={leftSlider}>
-                <div className="left-slider-layout" ></div>
-            </button>
-            <button className="right-slider" onClick={rightSlider}>
-                <div  className="right-slider-layout" ></div>
-            </button>
-            <div className="calendar-layout">
-                <div className="inner-calendar-layout" style={{transform:translateX}}>
-                    <Dates counter={0}></Dates>
-                    <Dates counter={1}></Dates>
-                    <Dates counter={2}></Dates>
-                    <Dates counter={3}></Dates>
-                    <Dates counter={4}></Dates>
-                    <Dates counter={5}></Dates>
-                    <Dates counter={6}></Dates>
-                    <Dates counter={7}></Dates>
+        <>
+            <div className="container">
+                <button className="left-slider" onClick={leftSlider}>
+                    <div className="left-slider-layout" ></div>
+                </button>
+                <button className="right-slider" onClick={rightSlider}>
+                    <div className="right-slider-layout" ></div>
+                </button>
+                <div className="calendar-layout">
+                    <div className="inner-calendar-layout" style={{ transform: translateX }}>
+                        <Dates counter={0}></Dates>
+                        <Dates counter={1}></Dates>
+                        <Dates counter={2}></Dates>
+                        <Dates counter={3}></Dates>
+                        <Dates counter={4}></Dates>
+                        <Dates counter={5}></Dates>
+                        <Dates counter={6}></Dates>
+                        <Dates counter={7}></Dates>
+                    </div>
+                </div>
+                <div className="price-information" >
+                    <p>Fares indicate price for 1 Adult and Economy Class in INR and are subject to change</p>
                 </div>
             </div>
-            <div className="price-information" >
-                <p>Fares indicate price for 1 Adult and Economy Class in INR and are subject to change</p>
-            </div>
-        </div>
+            
+        </>
+
     );
 }
-export default Calendar 
+export default Calendar
