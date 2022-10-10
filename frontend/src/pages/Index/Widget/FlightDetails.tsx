@@ -19,13 +19,14 @@ const GenerateButtons = ({ start, end }: any) => {
     {i}</button>)}</>
 }
 
-const RadioInput = ({type,coach}:any) =>{
+const RadioInput = ({type,coach,radioClick,clickedClass}:any) =>{
     const ID="radio-"+type+"button";
+    
     return(
-        <div className="ri-coaches">
+        <div className="ri-coaches" onClick={radioClick}>
             <label htmlFor={ID}>
                 <input className="ric-select" type="radio" id={ID} value={type}/>
-                <i className="ric-radio"></i>
+                <i className={"ric-radio"+clickedClass }></i>
                 <span>{coach}</span>
             </label>
         </div>
@@ -49,7 +50,12 @@ const Passengers = ({ passengerType, info, start, end }: any) => {
 }
 
 const FlightDetails = () => {
+    const [radioSelected,setRadioSelected]=useState<number>(1);
 
+    const radioClick = (num:number) =>{
+        if(num!==radioSelected) setRadioSelected(i=>num);
+    }
+    
     return (
         <div className="flight-info">
             <div className="flight-info-heading">
@@ -64,9 +70,9 @@ const FlightDetails = () => {
                 <p>Cabin</p>
             </div>
             <div className="radio-inputs">
-                <RadioInput type="e" coach="Economy"/>
-                <RadioInput type="p" coach="Premium Economy"/>
-                <RadioInput type="b" coach="Business"/>
+                <RadioInput type="e" coach="Economy" radioClick={()=>radioClick(1)} clickedClass={radioSelected===1?' ri-clicked':''}/>
+                <RadioInput type="p" coach="Premium Economy" radioClick={()=>radioClick(2)} clickedClass={radioSelected===2?' ri-clicked':''}/>
+                <RadioInput type="b" coach="Business" radioClick={()=>radioClick(3)} clickedClass={radioSelected===3?' ri-clicked':''}/>
             </div>
         </div>
     )
