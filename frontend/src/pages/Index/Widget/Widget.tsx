@@ -32,6 +32,8 @@ const Widget = () => {
 
     const selectedDate = (newDate:any)=>{
         setFromBookingDate(i=>newDate);
+        setFromDateClick(i=>false);
+        setPassengerInfo(i=>true);
     } 
 
 

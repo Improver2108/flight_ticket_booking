@@ -9,14 +9,14 @@ const Dates = ({ dateTime, currentDate, counter,selectDate}: any) => {
 
 
     const dates = [<div className={(counter === 0 && 1 < date.day) ? 'blackout-dates' :
-        (currentDate.day===1 && currentDate.month===date.month)?'higlight-dates':''} 
-    style={{ gridColumnStart: date.startOf('month').weekday }} >1</div>]
+        (currentDate[0]===1 && currentDate[1]===date.month)?'higlight-dates':''} 
+    style={{ gridColumnStart: date.startOf('month').weekday }} onClick={(counter === 0 && 1 < date.day)?undefined:()=>selectDate([1,date.month,date.year])}>1</div>]
 
     for (let i = 2; i <= totalDays; i++) {
         if (counter === 0 && i < date.day)
             dates.push(<div className="blackout-dates">{i}</div>)
         else
-            dates.push(<div className={currentDate.day===i && currentDate.month===date.month?'higlight-dates':''} onClick={()=>selectDate([i,date.month,date.year])}>{i}</div>)
+            dates.push(<div className={currentDate[0]==i && currentDate[1]===date.month?'higlight-dates':''} onClick={()=>selectDate([i,date.month,date.year])}>{i}</div>)
     }
 
     return (
@@ -65,14 +65,7 @@ const Calendar = ({dateTime,currentDate,selectDate}:any) => {
                 </button>
                 <div className="calendar-layout">
                     <div className="inner-calendar-layout" style={{ transform: translateX }}>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={0}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={1}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={2}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={3}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={4}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={5}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={6}/>
-                        <Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={7}/>
+                        {[...Array(8)].map((i,index)=><Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={index}/>)}
                     </div>
                 </div>
                 <div className="price-information" >
