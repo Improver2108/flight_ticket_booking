@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { DateTime } from "luxon";
 import './Widget.css'
 import Calendar from "./Calendar";
 import FlightDetails from "./FlightDetails";
 
 const Widget = () => {
+
+    const months:string[]=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
 
     const fromDestination = useRef<any>(null);
     const toDestionation = useRef<any>(null);
@@ -17,51 +20,41 @@ const Widget = () => {
     const [toDateClick, setToDateClick] = useState<boolean>(false);
     const [passengerInfo, setPassengerInfo] = useState<boolean>(false);
 
-    const fromHandleOutsideClick = (e: any) => {
+    const [fromCity,setFromCity]=useState<string[]>(['DEL','New Delhi']);
+    const [toCity,setToCity]=useState<string[]>(['BOM','Mumbai']);
+    
+
+    const [fromBookingDate,setFromBookingDate] = useState(DateTime.now().plus({days:1}));
+
+
+    const handleOutsideClick = (e: any) => {
         if (fromDestination.current && !fromDestination.current.contains(e.target))
             setFromDestinationClick(prevDest => false);
-    }
-    const toHandleOutsideClick = (e: any) => {
         if (toDestionation.current && !toDestionation.current.contains(e.target))
             setToDestinationClick(prevDest => false);
-    }
-    const fromDateOutsideClick = (e: any) => {
         if (fromDate.current && !fromDate.current.contains(e.target))
             setFromDateClick(i => false);
-    }
-    const toDateOutsideClick = (e: any) => {
         if (toDate.current && !toDate.current.contains(e.target))
             setToDateClick(i => false);
-    }
-
-    const fligtDetailOutsideClick = (e: any) => {
         if (flightDetails.current && !flightDetails.current.contains(e.target))
             setPassengerInfo(i => false);
     }
 
     useEffect(() => {
-        document.addEventListener('click', fromHandleOutsideClick, true);
-        document.addEventListener('click', toHandleOutsideClick, true);
-        document.addEventListener('click', toDateOutsideClick, true);
-        document.addEventListener('click', fromDateOutsideClick, true);
-        document.addEventListener('click', fligtDetailOutsideClick, true);
+        document.addEventListener('click', handleOutsideClick, true);
         return () => {
-            document.removeEventListener('click', fromHandleOutsideClick, true);
-            document.removeEventListener('click', toHandleOutsideClick, true);
-            document.addEventListener('click', toDateOutsideClick, true);
-            document.addEventListener('click', fromDateOutsideClick, true);
-            document.addEventListener('click', fligtDetailOutsideClick, true);
+            document.removeEventListener('click', handleOutsideClick, true);
         }
-    }, [fromDestinationClick, toDestinationClick, fromDateClick, toDateClick])
+    }, [fromDestinationClick, toDestinationClick, fromDateClick, toDateClick, passengerInfo])
 
 
     const fromDestinationButton = <>
-        <span className="mini-text">DEL</span>
-        <span className="main-text">NEW DELHI</span>
+        <span className="mini-text">{fromCity[0]}</span>
+        <span className="main-text">{fromCity[1]}</span>
     </>;
     const toDestinationButton = <>
-        <span className="mini-text">BOM</span>
-        <span className="main-text">MUMBAI</span>
+        <span className="mini-text">{toCity[0]}</span>
+        <span className="main-text">{toCity[1]}</span>
     </>
     const destinationInput = <>
         <input className="destination-input" type="text" placeholder="Select Airport" />
@@ -70,7 +63,7 @@ const Widget = () => {
     return (
         <div className="booking-widget">
             <div className="from-destination-container">
-                <div ref={fromDestination} className="destination" onClick={e => setFromDestinationClick(true)}>
+                <div ref={fromDestination} className="destination" onClick={e => setFromDestinationClick(i=>true)}>
                     {!fromDestinationClick ? fromDestinationButton : destinationInput}
                 </div>
             </div>
@@ -82,12 +75,12 @@ const Widget = () => {
             <div className="dates">
                 <div className="dates-inputs" ref={fromDate} >
                     <div onClick={e => setFromDateClick(i => !i)}>
-                        <span>17 Sept</span>
+                        <span>{fromBookingDate.toLocaleString({day:'numeric',month:'short'})}</span>
                         <span className="day-text">TODAY</span>
                     </div>
                     <div className="details-container" style={{ left: "-222px", top: "65px" }}>
                         {fromDateClick ?
-                            <><Calendar /> <div className="details-arrows" style={{ left: "275px" }}></div> </>
+                            <><Calendar dateTime={DateTime} currentDate={fromBookingDate}/> <div className="details-arrows" style={{ left: "275px" }}></div> </>
                             : <></>}
                     </div>
 
@@ -102,7 +95,7 @@ const Widget = () => {
                     </div>
                     <div className="details-container" style={{ left: "-308px", top: "65px" }}>
                         {toDateClick ?
-                            <> <Calendar />  <div className="details-arrows" style={{ left: "355px" }}></div> </>
+                            <> <Calendar dateTime={DateTime} currentDate={fromBookingDate} />  <div className="details-arrows" style={{ left: "355px" }}></div> </>
                             : <></>}
                     </div>
                 </div>
@@ -116,7 +109,7 @@ const Widget = () => {
                     </div>
                     <div className="details-container" style={{ top: "65px", left: "-210px" }}>
                         {passengerInfo ?
-                            <><FlightDetails /> <div className="details-arrows" style={{left: "60%",backgroundColor:"#f2f2f2"}}></div></>
+                            <><FlightDetails /> <div className="details-arrows" style={{ left: "60%", backgroundColor: "#f2f2f2" }}></div></>
                             : <></>}
                     </div>
                 </div>

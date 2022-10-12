@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { DateTime } from "luxon";
 import './Calendar.css'
 
-const Dates = ({ counter }: any) => {
+const Dates = ({ dateTime, currentDate, counter}: any) => {
     const lisWeekdays: any = ["MON", "TUE", "WED", "THU", "FRI"].map(weekday => <div className="weekdays">{weekday}</div>);
     const lisWeekends: any = ["SAT", "SUN"].map(weekend => <div className="weekends">{weekend}</div>);
-    const date = DateTime.now().plus({ months: counter });
+    const date = dateTime.now().plus({ months: counter });
     const totalDays = date.daysInMonth;
-    const dates = [<div className={(counter === 0 && 1 < date.day) ? 'blackout-dates' : ''} style={{ gridColumnStart: date.startOf('month').weekday }}>1</div>]
+
+    const dates = [<div className={(counter === 0 && 1 < date.day) ? 'blackout-dates' :
+        (currentDate.day===1 && currentDate.month===date.month)?'higlight-dates':''} 
+    style={{ gridColumnStart: date.startOf('month').weekday }}>1</div>]
+
     for (let i = 2; i <= totalDays; i++) {
         if (counter === 0 && i < date.day)
             dates.push(<div className="blackout-dates">{i}</div>)
         else
-            dates.push(<div>{i}</div>)
+            dates.push(<div className={currentDate.day===i && currentDate.month===date.month?'higlight-dates':''}>{i}</div>)
     }
 
     return (
@@ -36,8 +39,7 @@ const Dates = ({ counter }: any) => {
     )
 }
 
-const Calendar = () => {
-
+const Calendar = ({dateTime,currentDate}:any) => {
     const [shift, setShift] = useState(0);
     const translateX: string = "translateX(" + shift + "px)";
     const rightSlider = (e: any) => {
@@ -61,14 +63,14 @@ const Calendar = () => {
                 </button>
                 <div className="calendar-layout">
                     <div className="inner-calendar-layout" style={{ transform: translateX }}>
-                        <Dates counter={0}></Dates>
-                        <Dates counter={1}></Dates>
-                        <Dates counter={2}></Dates>
-                        <Dates counter={3}></Dates>
-                        <Dates counter={4}></Dates>
-                        <Dates counter={5}></Dates>
-                        <Dates counter={6}></Dates>
-                        <Dates counter={7}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={0}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={1}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={2}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={3}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={4}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={5}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={6}></Dates>
+                        <Dates dateTime={dateTime} currentDate={currentDate} counter={7}></Dates>
                     </div>
                 </div>
                 <div className="price-information" >

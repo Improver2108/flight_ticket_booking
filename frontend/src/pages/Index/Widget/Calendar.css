@@ -138,6 +138,12 @@
     grid-column-start: 4;
 }
 
+.higlight-dates{
+    background-color: #00a4b5;
+    color: #fff;
+    position: relative;
+}
+
 .price-information {
     padding: 12px 22px;
     z-index: 1;
