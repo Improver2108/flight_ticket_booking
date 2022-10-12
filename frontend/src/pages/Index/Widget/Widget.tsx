@@ -23,8 +23,16 @@ const Widget = () => {
     const [fromCity,setFromCity]=useState<string[]>(['DEL','New Delhi']);
     const [toCity,setToCity]=useState<string[]>(['BOM','Mumbai']);
     
+    
 
-    const [fromBookingDate,setFromBookingDate] = useState(DateTime.now().plus({days:1}));
+    const [fromBookingDate,setFromBookingDate] = useState(()=>{
+        const date=DateTime.now().plus({day:1});
+        return [date.day,date.month,date.year];
+    });
+
+    const selectedDate = (newDate:any)=>{
+        setFromBookingDate(i=>newDate);
+    } 
 
 
     const handleOutsideClick = (e: any) => {
@@ -75,12 +83,12 @@ const Widget = () => {
             <div className="dates">
                 <div className="dates-inputs" ref={fromDate} >
                     <div onClick={e => setFromDateClick(i => !i)}>
-                        <span>{fromBookingDate.toLocaleString({day:'numeric',month:'short'})}</span>
+                        <span>{fromBookingDate[0]} {months[fromBookingDate[1]-1]}</span>
                         <span className="day-text">TODAY</span>
                     </div>
                     <div className="details-container" style={{ left: "-222px", top: "65px" }}>
                         {fromDateClick ?
-                            <><Calendar dateTime={DateTime} currentDate={fromBookingDate}/> <div className="details-arrows" style={{ left: "275px" }}></div> </>
+                            <><Calendar selectDate={selectedDate} dateTime={DateTime} currentDate={fromBookingDate}/> <div className="details-arrows" style={{ left: "275px" }}></div> </>
                             : <></>}
                     </div>
 
