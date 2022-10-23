@@ -6,7 +6,7 @@ import FlightDetails from "./FlightDetails";
 
 const Widget = () => {
 
-    const months:string[]=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+    const months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
     const fromDestination = useRef<any>(null);
     const toDestionation = useRef<any>(null);
@@ -20,21 +20,51 @@ const Widget = () => {
     const [toDateClick, setToDateClick] = useState<boolean>(false);
     const [passengerInfo, setPassengerInfo] = useState<boolean>(false);
 
-    const [fromCity,setFromCity]=useState<string[]>(['DEL','New Delhi']);
-    const [toCity,setToCity]=useState<string[]>(['BOM','Mumbai']);
-    
-    
+    const [fromCity, setFromCity] = useState<string[]>(['DEL', 'New Delhi']);
+    const [toCity, setToCity] = useState<string[]>(['BOM', 'Mumbai']);
 
-    const [fromBookingDate,setFromBookingDate] = useState(()=>{
-        const date=DateTime.now().plus({day:1});
-        return [date.day,date.month,date.year];
+    const [fromBookingDate, setFromBookingDate] = useState(() => {
+        const date = DateTime.now().plus({ day: 1 });
+        return [date.year, date.month, date.day];
     });
+    const [toBookingDate, setToBookingDate] = useState<number[]>([]);
 
-    const selectedDate = (newDate:any)=>{
-        setFromBookingDate(i=>newDate);
-        setFromDateClick(i=>false);
-        setPassengerInfo(i=>true);
-    } 
+    const [selected,setSelected]=useState<number[]>([1,0,0]);
+    const [coachClass,setCoachClass]=useState('Economy');
+
+    const selectedFromDate = (newDate: any) => {
+        if (toBookingDate.length>0 && newDate > toBookingDate){
+            setFromBookingDate(i=>toBookingDate)
+            setToBookingDate(i=>newDate);
+        }
+        else setFromBookingDate(i => newDate);
+        setFromDateClick(i => false);
+        setPassengerInfo(i => true);
+    }
+    const selectedToDate = (newDate: any) => {
+        if (newDate < fromBookingDate){
+            setToBookingDate(i=>fromBookingDate)
+            setFromBookingDate(i=>newDate);
+        }
+        else setToBookingDate(i => newDate);
+        setToDateClick(i => false);
+        setPassengerInfo(i => true);
+    }
+
+    const selectNum=(num:number,passengerType:String)=>{
+        let i:number;
+        if(passengerType==='Adults') i=0;
+        else if(passengerType==='Children') i=1;
+        else i=2;
+        const new_selected=selected.map((ele,index)=>(index===i)?num:ele);
+        setSelected(i=>new_selected);
+    }
+
+    const totalPassengers=()=>{
+        let sum=selected.reduce((x,y)=>x+y,0);
+        if(sum.toString().length===1) return '0'+sum;
+        return sum.toString();    
+    }
 
 
     const handleOutsideClick = (e: any) => {
@@ -73,7 +103,7 @@ const Widget = () => {
     return (
         <div className="booking-widget">
             <div className="from-destination-container">
-                <div ref={fromDestination} className="destination" onClick={e => setFromDestinationClick(i=>true)}>
+                <div ref={fromDestination} className="destination" onClick={e => setFromDestinationClick(i => true)}>
                     {!fromDestinationClick ? fromDestinationButton : destinationInput}
                 </div>
             </div>
@@ -85,12 +115,12 @@ const Widget = () => {
             <div className="dates">
                 <div className="dates-inputs" ref={fromDate} >
                     <div onClick={e => setFromDateClick(i => !i)}>
-                        <span>{fromBookingDate[0]} {months[fromBookingDate[1]-1]}</span>
+                        <span>{fromBookingDate[2]} {months[fromBookingDate[1] - 1]}</span>
                         <span className="day-text">TODAY</span>
                     </div>
                     <div className="details-container" style={{ left: "-222px", top: "65px" }}>
                         {fromDateClick ?
-                            <><Calendar selectDate={selectedDate} dateTime={DateTime} currentDate={fromBookingDate}/> <div className="details-arrows" style={{ left: "275px" }}></div> </>
+                            <><Calendar selectDate={selectedFromDate} dateTime={DateTime} fromDate={fromBookingDate} toDate={toBookingDate} /> <div className="details-arrows" style={{ left: "275px" }}></div> </>
                             : <></>}
                     </div>
 
@@ -99,13 +129,27 @@ const Widget = () => {
             </div>
             <div className="dates">
                 <div className="dates-inputs" ref={toDate}>
-                    <div onClick={e => setToDateClick(i => !i)}>
-                        <span className="return-date">ADD RETURN</span>
-                        <span className="plus-button"></span>
+                    <div onClick={e=>{
+                        if(toBookingDate.length===0){
+                            let date = DateTime.now();
+                            date=date.set({day:fromBookingDate[2],month:fromBookingDate[1],year:fromBookingDate[0]}).plus({day:1});
+                            setToBookingDate(i=>[date.year,date.month,date.day]);
+                        }
+                        setToDateClick(i=>!i);
+                    }}>
+                        {toBookingDate.length ? <>
+                            <span>{toBookingDate[2]} {months[toBookingDate[1] - 1]}</span>
+                            <span className="day-text">TODAY</span>
+                        </> :
+                            <>
+                                <span className="return-date">Add Return</span>
+                                <span className="plus-button"></span>
+                            </>}
+
                     </div>
                     <div className="details-container" style={{ left: "-308px", top: "65px" }}>
                         {toDateClick ?
-                            <> <Calendar dateTime={DateTime} currentDate={fromBookingDate} />  <div className="details-arrows" style={{ left: "355px" }}></div> </>
+                            <> <Calendar selectDate={selectedToDate} dateTime={DateTime} fromDate={fromBookingDate} toDate={toBookingDate} />  <div className="details-arrows" style={{ left: "355px" }}></div> </>
                             : <></>}
                     </div>
                 </div>
@@ -114,12 +158,12 @@ const Widget = () => {
             <div className="flight-details" >
                 <div className="flight-details-inputs" ref={flightDetails}>
                     <div onClick={e => setPassengerInfo(i => !i)}>
-                        <span>N TRAVELLERS, </span>
-                        <span>CLASS</span>
+                        <span>{totalPassengers()} Travellers, </span>
+                        <span>{coachClass}</span>
                     </div>
                     <div className="details-container" style={{ top: "65px", left: "-210px" }}>
                         {passengerInfo ?
-                            <><FlightDetails /> <div className="details-arrows" style={{ left: "60%", backgroundColor: "#f2f2f2" }}></div></>
+                            <><FlightDetails selected={selected} selectNum={selectNum}/> <div className="details-arrows" style={{ left: "60%", backgroundColor: "#f2f2f2" }}></div></>
                             : <></>}
                     </div>
                 </div>

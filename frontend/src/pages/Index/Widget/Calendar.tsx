@@ -1,29 +1,47 @@
 import React, { useState } from "react";
 import './Calendar.css'
 
-const Dates = ({ dateTime, currentDate, counter,selectDate}: any) => {
+const Dates = ({ dateTime, fromDate,toDate,counter,selectDate}: any) => {
     const lisWeekdays: any = ["MON", "TUE", "WED", "THU", "FRI"].map(weekday => <div className="weekdays">{weekday}</div>);
     const lisWeekends: any = ["SAT", "SUN"].map(weekend => <div className="weekends">{weekend}</div>);
-    const date = dateTime.now().plus({ months: counter });
-    const totalDays = date.daysInMonth;
+    const Date = dateTime.now().plus({ months: counter });
+    const totalDays = Date.daysInMonth;
 
+    const checkBetweenDates=(date:any)=>{
+        let d=dateTime.now().set({day:date[2],month:date[1],year:date[0]}).startOf('day')
+        let d1=dateTime.now().set({day:fromDate[2],month:fromDate[1],year:fromDate[0]}).startOf('day')
+        let d2=dateTime.now().set({day:toDate[2],month:toDate[1],year:toDate[0]}).startOf('day')
+        if(d>d1 && d<d2) return true;
+        return false;
+    }
 
-    const dates = [<div className={(counter === 0 && 1 < date.day) ? 'blackout-dates' :
-        (currentDate[0]===1 && currentDate[1]===date.month)?'higlight-dates':''} 
-    style={{ gridColumnStart: date.startOf('month').weekday }} onClick={(counter === 0 && 1 < date.day)?undefined:()=>selectDate([1,date.month,date.year])}>1</div>]
+    const isEqualDates=(date:any)=>{
+        if(toDate[2]===date[2] && toDate[1]===date[1] || fromDate[2]===date[2] && fromDate[1]===date[1]) return true;
+        return false
+    }
+    
+    const dates = [<div className={(counter === 0 && 1 < Date.day) ? 'blackout-dates' :
+        isEqualDates([Date.year,Date.month,1])?'higlight-dates':
+        checkBetweenDates([Date.year,Date.month,1])?'middle-highlight-dates':''}
+
+    style={{ gridColumnStart: Date.startOf('month').weekday }} onClick={(counter === 0 && 1 < Date.day)?undefined:()=>selectDate([Date.year,Date.month,1])}>1</div>]
 
     for (let i = 2; i <= totalDays; i++) {
-        if (counter === 0 && i < date.day)
-            dates.push(<div className="blackout-dates">{i}</div>)
-        else
-            dates.push(<div className={currentDate[0]==i && currentDate[1]===date.month?'higlight-dates':''} onClick={()=>selectDate([i,date.month,date.year])}>{i}</div>)
+        if (counter === 0 && i < Date.day)
+            dates.push(<div key={i} className="blackout-dates">{i}</div>)
+        else{
+            dates.push(<div key={i} className={isEqualDates([Date.year,Date.month,i])?'higlight-dates':
+            checkBetweenDates([Date.year,Date.month,i])?'middle-highlight-dates':''} 
+ 
+            onClick={()=>selectDate([Date.year,Date.month,i])}>{i}</div>)
+        }            
     }
 
     return (
         <div className="calendar-dates">
             <div >
                 <div className="month-name">
-                    <p>{date.toLocaleString({ month: "long", year: "numeric" })}</p>
+                    <p>{Date.toLocaleString({ month: "long", year: "numeric" })}</p>
                 </div>
                 <div className="weeks">
                     {lisWeekdays}
@@ -40,7 +58,7 @@ const Dates = ({ dateTime, currentDate, counter,selectDate}: any) => {
     )
 }
 
-const Calendar = ({dateTime,currentDate,selectDate}:any) => {
+const Calendar = ({dateTime,fromDate,toDate,selectDate}:any) => {
     const [shift, setShift] = useState(0);
     const translateX: string = "translateX(" + shift + "px)";
     const rightSlider = (e: any) => {
@@ -65,7 +83,7 @@ const Calendar = ({dateTime,currentDate,selectDate}:any) => {
                 </button>
                 <div className="calendar-layout">
                     <div className="inner-calendar-layout" style={{ transform: translateX }}>
-                        {[...Array(8)].map((i,index)=><Dates selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} currentDate={currentDate} counter={index}/>)}
+                        {[...Array(8)].map((i,index)=><Dates key={i} selectDate={(date:any)=>selectDate(date)} dateTime={dateTime} fromDate={fromDate} toDate={toDate} counter={index}/>)}
                     </div>
                 </div>
                 <div className="price-information" >

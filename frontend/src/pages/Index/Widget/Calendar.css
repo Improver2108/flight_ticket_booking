@@ -131,7 +131,7 @@
     padding: 5px 0 9px;
     cursor: pointer;
     text-align: center;
-    border-radius: 6px;
+    
 }
 
 .day-start {
@@ -142,7 +142,14 @@
     background-color: #00a4b5;
     color: #fff;
     position: relative;
+    border-radius: 6px;
 }
+
+.middle-highlight-dates{
+    border-radius: 0px;
+    background-color: rgba(0,164,181,.2);
+}
+
 
 .price-information {
     padding: 12px 22px;

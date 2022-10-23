@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import './FlightDetails.css'
 
-const GenerateButtons = ({ start, end }: any) => {
-    const [selected, setSelected] = useState<number>(start);
+const GenerateButtons = ({selected, start, end ,selectNum}: any) => {
     const buttonNumers = [];
 
     const setCount =  (num:number)=>{
-        if(num!==selected) setSelected(i=>num);
+        if(num!==selected) selectNum(num);
     }
     
     for (let i = start; i <= end; i++) 
@@ -33,7 +32,7 @@ const RadioInput = ({type,coach,radioClick,clickedClass}:any) =>{
     )
 }
 
-const Passengers = ({ passengerType, info, start, end }: any) => {
+const Passengers = ({ selected, passengerType, info, start, end,selectNum}: any) => {
     return (
         <>
             <div className="passengers">
@@ -42,16 +41,19 @@ const Passengers = ({ passengerType, info, start, end }: any) => {
                     <p className="pt-info">{info}</p>
                 </div>
                 <div className="p-count">
-                    <GenerateButtons start={start} end={end}></GenerateButtons>
+                    <GenerateButtons selected={selected} start={start} end={end} selectNum={(num:number)=>selectNum(num,passengerType)}></GenerateButtons>
                 </div>
             </div>
         </>
     );
 }
 
-const FlightDetails = () => {
+const FlightDetails = ({selected,selectNum}:any) => {
+    
     const [radioSelected,setRadioSelected]=useState<number>(1);
 
+    
+    
     const radioClick = (num:number) =>{
         if(num!==radioSelected) setRadioSelected(i=>num);
     }
@@ -62,9 +64,9 @@ const FlightDetails = () => {
                 <p>Number of Travellers</p>
             </div>
             <div >
-                <Passengers passengerType="Adults" info="12 years & Above (On travel day)" start={1} end={9} />
-                <Passengers passengerType="Children" info="2 - 12 years (On travel day)" start={0} end={9} />
-                <Passengers passengerType="Infants" info="Under 2 years (On travel day)" start={0} end={9} />
+                <Passengers selected={selected[0]} selectNum={(num:number,passengerType:string)=>selectNum(num,passengerType)} passengerType="Adults" info="12 years & Above (On travel day)" start={1} end={9}/>
+                <Passengers selected={selected[1]} selectNum={(num:number,passengerType:string)=>selectNum(num,passengerType)} passengerType="Children" info="2 - 12 years (On travel day)" start={0} end={9}/>
+                <Passengers selected={selected[2]} selectNum={(num:number,passengerType:string)=>selectNum(num,passengerType)} passengerType="Infants" info="Under 2 years (On travel day)" start={0} end={9}/>
             </div>
             <div className="flight-info-heading">
                 <p>Cabin</p>
