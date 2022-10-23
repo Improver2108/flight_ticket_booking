@@ -48,14 +48,10 @@ const Passengers = ({ selected, passengerType, info, start, end,selectNum}: any)
     );
 }
 
-const FlightDetails = ({selected,selectNum}:any) => {
-    
-    const [radioSelected,setRadioSelected]=useState<number>(1);
-
-    
+const FlightDetails = ({selected,selectNum,radioSelected,selectRadio}:any) => { 
     
     const radioClick = (num:number) =>{
-        if(num!==radioSelected) setRadioSelected(i=>num);
+        if(num!==radioSelected) selectRadio(num);
     }
     
     return (

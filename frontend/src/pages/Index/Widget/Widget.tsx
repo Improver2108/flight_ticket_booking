@@ -30,7 +30,8 @@ const Widget = () => {
     const [toBookingDate, setToBookingDate] = useState<number[]>([]);
 
     const [selected,setSelected]=useState<number[]>([1,0,0]);
-    const [coachClass,setCoachClass]=useState('Economy');
+    const [radioSelected,setRadioSelected]=useState<number>(1);
+    
 
     const selectedFromDate = (newDate: any) => {
         if (toBookingDate.length>0 && newDate > toBookingDate){
@@ -66,6 +67,11 @@ const Widget = () => {
         return sum.toString();    
     }
 
+    const coachClass=()=>{
+        if(radioSelected===1) return 'Economy';
+        if(radioSelected===2) return 'Premiu...';
+        return 'Business';
+    }
 
     const handleOutsideClick = (e: any) => {
         if (fromDestination.current && !fromDestination.current.contains(e.target))
@@ -159,11 +165,11 @@ const Widget = () => {
                 <div className="flight-details-inputs" ref={flightDetails}>
                     <div onClick={e => setPassengerInfo(i => !i)}>
                         <span>{totalPassengers()} Travellers, </span>
-                        <span>{coachClass}</span>
+                        <span>{coachClass()}</span>
                     </div>
                     <div className="details-container" style={{ top: "65px", left: "-210px" }}>
                         {passengerInfo ?
-                            <><FlightDetails selected={selected} selectNum={selectNum}/> <div className="details-arrows" style={{ left: "60%", backgroundColor: "#f2f2f2" }}></div></>
+                            <><FlightDetails radioSelected={radioSelected}  selectRadio={(num:number)=>setRadioSelected(i=>num)} selected={selected} selectNum={selectNum}/> <div className="details-arrows" style={{ left: "60%", backgroundColor: "#f2f2f2" }}></div></>
                             : <></>}
                     </div>
                 </div>
