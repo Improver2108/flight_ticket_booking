@@ -151,8 +151,8 @@ const Widget = () => {
                                 <span className="return-date">Add Return</span>
                                 <span className="plus-button"></span>
                             </>}
-
                     </div>
+                    {(toBookingDate.length>0)?<span className="remove-return-date" onClick={()=>setToBookingDate(i=>[])}></span>:<></>}
                     <div className="details-container" style={{ left: "-308px", top: "65px" }}>
                         {toDateClick ?
                             <> <Calendar selectDate={selectedToDate} dateTime={DateTime} fromDate={fromBookingDate} toDate={toBookingDate} />  <div className="details-arrows" style={{ left: "355px" }}></div> </>

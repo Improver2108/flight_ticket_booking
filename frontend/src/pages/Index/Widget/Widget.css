@@ -70,7 +70,8 @@
     background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
     position: absolute;
     cursor: pointer;
-    margin-left: 17px;
+    right:9px;
+    top:calc(50% - 11px);
     background-position: -101px -41px;
     width: 17px;
     height: 18px;
@@ -78,6 +79,17 @@
 
 .return-date{
     color: #767676;
+}
+
+.remove-return-date{
+    position: absolute;
+    background-image: url(https://d1u069vtk5j1z6.cloudfront.net/flightswebservice/build/desktop/images/desktop_common_icons.a4fd6515.png);
+    height: 14px;
+    width: 14px;
+    background-position: 0 -94px;
+    right: 9px;
+    top:calc(50% - 7px);
+    cursor: pointer;
 }
 
 .flight-details{
