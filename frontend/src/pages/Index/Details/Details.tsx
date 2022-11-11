@@ -1,10 +1,18 @@
 import React from "react";
+import Widget from "../Widget/Widget";
+import Filter from "./Filter";
+import Flights from "./Flights";
 import './Details.css';
-const Detail=()=>{
+
+const Details=()=>{
     return(
     <div className="details">
-        <h1>here will be the ticket details</h1>
+        <Widget/>
+        <div className="d-container">
+            <Filter/>
+            <Flights/>
+        </div>
     </div>);
 }
 
-export default Detail;
+export default Details;

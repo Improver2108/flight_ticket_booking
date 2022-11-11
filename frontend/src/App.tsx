@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Layout from './pages/Layout/Layout';
+import Details from './pages/Index/Details/Details';
 
 
 
@@ -18,7 +19,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="index" element={<Index />}/>
+          <Route path="flights" element={<Index />}/>
+          <Route path="details" element={<Details/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

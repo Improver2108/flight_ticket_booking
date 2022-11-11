@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import './Widget.css'
 import Calendar from "./Calendar";
 import FlightDetails from "./FlightDetails";
+import axios from "axios";
 
 const Widget = () => {
 
@@ -73,6 +74,12 @@ const Widget = () => {
         return 'Business';
     }
 
+    const submitData = async(e:any)=>{
+        e.preventDefault();
+        const d=await axios.get(`http://localhost:5000/flights/search/${fromCity}/${toCity}/${selected[0]}/${selected[1]}/${selected[2]}/${radioSelected}/${fromBookingDate}/${toBookingDate}`)
+        console.log(d.data)
+    }
+
     const handleOutsideClick = (e: any) => {
         if (fromDestination.current && !fromDestination.current.contains(e.target))
             setFromDestinationClick(prevDest => false);
@@ -85,6 +92,7 @@ const Widget = () => {
         if (flightDetails.current && !flightDetails.current.contains(e.target))
             setPassengerInfo(i => false);
     }
+
 
     useEffect(() => {
         document.addEventListener('click', handleOutsideClick, true);
@@ -175,7 +183,7 @@ const Widget = () => {
                 </div>
             </div>
             <div className="details-submission ">
-                <button type="submit">Search</button>
+                <button onClick={submitData} type="submit">Search</button>
             </div>
         </div>
     )

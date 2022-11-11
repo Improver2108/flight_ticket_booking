@@ -1,6 +1,4 @@
-.details{
-    background-color: coral;
-    margin-top: 100px;
-    width: 50%;
-    border-radius: 8px;
+.d-container{
+    padding: 5px;
 }
+
