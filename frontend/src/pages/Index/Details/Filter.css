@@ -52,7 +52,6 @@
 }
 
 .dfft-title{
-    font-weight: 400;
     margin-bottom: 2px;
 }
 
@@ -62,12 +61,26 @@
 }
 
 .dfftt-title{
+    font-weight: 400;
     margin-bottom: 10px;
 }
 
 .dff-more{
     margin-top: 6px;
+    margin-bottom: 14px;
 }
 
+.dffm-title{
+    margin-bottom: 10px;
+}
+
+.dffp-title{
+    margin-bottom: 10px;
+}
+
+.dffpb-checkbox>label{
+    vertical-align: text-bottom;
+    font-weight: 400;
+}
 
 

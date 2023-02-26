@@ -4,6 +4,7 @@ import './Widget.css'
 import Calendar from "./Calendar";
 import FlightDetails from "./FlightDetails";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Widget = () => {
 
@@ -74,10 +75,16 @@ const Widget = () => {
         return 'Business';
     }
 
+    const navigate=useNavigate();
+
     const submitData = async(e:any)=>{
         e.preventDefault();
-        const d=await axios.get(`http://localhost:5000/flights/search/${fromCity}/${toCity}/${selected[0]}/${selected[1]}/${selected[2]}/${radioSelected}/${fromBookingDate}/${toBookingDate}`)
-        console.log(d.data)
+        // const d=await axios.get(`http://localhost:5000/flights/search/${fromCity}/${toCity}/${selected[0]}/${selected[1]}/${selected[2]}/${radioSelected}/${fromBookingDate}/${toBookingDate}`)
+        const d=await axios.post('http://localhost:5000/getFlightDetals',{
+            fromCity:fromCity,
+            toCity:toCity
+        });
+        console.log(d.data);
     }
 
     const handleOutsideClick = (e: any) => {

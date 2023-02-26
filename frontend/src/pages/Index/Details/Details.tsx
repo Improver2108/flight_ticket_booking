@@ -3,8 +3,10 @@ import Widget from "../Widget/Widget";
 import Filter from "./Filter";
 import Flights from "./Flights";
 import './Details.css';
+import { useLocation } from "react-router-dom";
 
 const Details=()=>{
+    const {state}:any=useLocation();  
     return(
     <div className="details">
         <Widget/>

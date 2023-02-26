@@ -13,6 +13,15 @@ const Time =({title}:any)=>{
     )
 }
 
+const Checkbox=({flight}:any)=>{
+    return(
+        <div className="dffpb-checkbox">
+            <input type="checkbox" id={`${flight}`}/>
+            <label htmlFor={`${flight}`}>{flight}</label> 
+        </div>
+    )
+}
+
 const Filter = () =>{
     return(
         <div className="d-flight-filter">
@@ -45,9 +54,9 @@ const Filter = () =>{
                 <div className="dff-prefer">
                     <div className="dffp-title">Preferred airlines</div>
                     <div className="dffp-buttons">
-                        <button className="f-button">IndiGo</button>
-                        <button className="f-button">Vistara</button>
-                        <button className="f-button">Air India</button>
+                       <Checkbox flight="IndiGo"/>
+                       <Checkbox flight="Vistara"/>
+                       <Checkbox flight="AirAsia"/>
                     </div>
                 </div>
                 
