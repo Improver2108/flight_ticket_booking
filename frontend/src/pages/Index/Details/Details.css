@@ -1,4 +1,6 @@
 .d-container{
+    display: flex;
+    justify-content: center;
     padding: 5px;
     font-size: 13px;
 }

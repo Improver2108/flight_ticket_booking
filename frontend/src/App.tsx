@@ -8,7 +8,9 @@ import Register from './pages/Register/Register';
 import Layout from './pages/Layout/Layout';
 import Details from './pages/Index/Details/Details';
 
-
+const Root=()=>{
+  return <h1>Hello</h1>
+}
 
 function App() {
   return (
@@ -19,8 +21,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="flights" element={<Index />}/>
-          <Route path="details" element={<Details/>}/>
+          <Route path="bookingDetails" element={<Index />}/>
+          <Route path="search" element={<Details/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

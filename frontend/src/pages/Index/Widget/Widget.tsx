@@ -85,6 +85,7 @@ const Widget = () => {
             toCity:toCity
         });
         console.log(d.data);
+        navigate(`/search`)
     }
 
     const handleOutsideClick = (e: any) => {

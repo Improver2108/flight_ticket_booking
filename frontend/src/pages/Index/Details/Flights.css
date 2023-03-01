@@ -1,3 +1,92 @@
-.d-flight-details{
-    width: 80%;
+:root{
+    --air-asia:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_I5_xxxhdpi.png";
+    --vistara:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_UK_xxxhdpi.png";
+    --air-india:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_AI_xxxhdpi.png";
 }
+
+.d-flight-details{
+    flex:0 0 850px;
+    margin: 0em 2em;
+}
+
+.dfd-heading{
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5em 0;
+}
+
+.dfd-flightList{
+    padding: 0;
+}
+
+.dfdf-columns{
+    display: flex;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.dfdf-columns>button{
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    color: rgb(0, 126, 210);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100px;
+}
+
+.dfdfc-departure{
+    margin-left: 170px;
+}
+
+.dfdfc-duration{
+    margin-left: 36px;
+}
+
+.dfdfc-arrival{
+    margin-left: 40px;
+}
+
+.dfdfc-price{
+    margin-left: 40px;
+}
+
+.dfdfl-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center ;
+    padding: 2em 0;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+.dfdfl-list>*{
+    width:100%;
+    text-align: center;
+}
+
+.dfdfl-list>div:nth-child(2),.dfdfl-list>div:nth-child(4),.dfdfl-list>div:nth-child(5){
+    font-size: large;
+    font-weight: 650;    
+}
+
+.dfdfl-list>div:nth-child(3)>div:nth-child(2){
+    position: relative;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+.dfdfl-list>div:nth-child(3)>div:nth-child(2)::before,.dfdfl-list>div:nth-child(3)>div:nth-child(2)::after{
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
+    background-color: rgb(231, 231, 231);
+    top:-4px;
+}
+
+.dfdfl-list>div:nth-child(3)>div:nth-child(2)::before{ 
+    left:0%;
+}
+.dfdfl-list>div:nth-child(3)>div:nth-child(2)::after{
+    left:100%;
+}
+
