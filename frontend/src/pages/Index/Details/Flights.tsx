@@ -2,10 +2,13 @@ import { duration } from "@mui/material";
 import React from "react";
 import './Flights.css'
 
-const List=({fLogo,departureTime,duration,arrivalTime,price}:any)=>{
+const List=({flight,departureTime,duration,arrivalTime,price}:any)=>{
     return(
         <div className="dfdfl-list">
-            <div>{fLogo}</div>
+            <div className="dfdfll-logo">
+                <img src={flight["link"]} alt="" />
+                <figcaption>{flight["name"]}</figcaption>
+            </div>
             <div>{departureTime}</div>
             <div>
                 <div>{duration}</div>
@@ -14,12 +17,17 @@ const List=({fLogo,departureTime,duration,arrivalTime,price}:any)=>{
             </div>
             <div>{arrivalTime}</div>
             <div>{price}</div>
-            <div>Book</div>
+            <div className="details-submission ">
+                <button>Book</button>
+            </div>
         </div>
     )
 }
 
 const Flights = () =>{
+    const airAsia={link:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_I5_xxxhdpi.png",name:"AirAsia"};
+    const vistara={link:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_UK_xxxhdpi.png",name:"Vistara"};
+    const indigo={link:"https://d1u069vtk5j1z6.cloudfront.net/flights/icons/airlines/flights_6E_xxxhdpi.png",name:"IndiGo"};
     return (
         <div className="d-flight-details">
             <div className="dfd-heading">
@@ -34,9 +42,9 @@ const Flights = () =>{
                     <button className="dfdfc-price">Price</button>
                 </div>                
                 <div className="dfdf-list">
-                    <List fLogo="IndiGo" departureTime="04:55" duration="5h 55m" arrivalTime="10:50" price="4092"/>
-                    <List fLogo="AirAsia" departureTime="03:55" duration="5h 5m" arrivalTime="11:50" price="4122"/>
-                    <List fLogo="Vistara" departureTime="04:55" duration="6h 11m" arrivalTime="12:11" price="3192"/>
+                    <List flight={airAsia} departureTime="04:55" duration="5h 55m" arrivalTime="10:50" price="4092"/>
+                    <List flight={vistara} departureTime="03:55" duration="5h 5m" arrivalTime="11:50" price="4122"/>
+                    <List flight={indigo} departureTime="04:55" duration="6h 11m" arrivalTime="12:11" price="3192"/>
                 </div>
             </div>
         </div>
