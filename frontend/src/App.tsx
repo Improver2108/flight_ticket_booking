@@ -22,7 +22,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="bookingDetails" element={<Index />}/>
-          <Route path="search" element={<Details/>}/>
+          <Route path="search/:fromCity/:toCity/:adultNumber/:chdildNumber/:infantNumber/:fromDate/:toDate?" element={<Details/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

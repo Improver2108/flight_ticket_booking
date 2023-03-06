@@ -42,9 +42,15 @@ const Flights = () =>{
                     <button className="dfdfc-price">Price</button>
                 </div>                
                 <div className="dfdf-list">
-                    <List flight={airAsia} departureTime="04:55" duration="5h 55m" arrivalTime="10:50" price="4092"/>
-                    <List flight={vistara} departureTime="03:55" duration="5h 5m" arrivalTime="11:50" price="4122"/>
-                    <List flight={indigo} departureTime="04:55" duration="6h 11m" arrivalTime="12:11" price="3192"/>
+                    {[...Array(8)].map((ele)=>{
+                        return(
+                            <>
+                                <List flight={airAsia} departureTime="04:55" duration="5h 55m" arrivalTime="10:50" price="4092"/>
+                                <List flight={vistara} departureTime="03:55" duration="5h 5m" arrivalTime="11:50" price="4122"/>
+                                <List flight={indigo} departureTime="04:55" duration="6h 11m" arrivalTime="12:11" price="3192"/>
+                            </>
+                        )
+                    })}
                 </div>
             </div>
         </div>

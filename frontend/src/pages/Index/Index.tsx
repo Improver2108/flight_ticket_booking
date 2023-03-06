@@ -10,9 +10,6 @@ const Index=()=>{
             <div className="widget-container">
                 <Widget/>
             </div>
-            {/* <div className="details-Container">
-                <Detail/>
-            </div>             */}
         </div>
     )
 }

@@ -45,7 +45,9 @@ const Widget = () => {
         setPassengerInfo(i => true);
     }
     const selectedToDate = (newDate: any) => {
-        if (newDate < fromBookingDate){
+        const d=DateTime.now().set({day:newDate[2],month:newDate[1],year:newDate[0]}).startOf('day')
+        const d1=DateTime.now().set({day:fromBookingDate[2],month:fromBookingDate[1],year:fromBookingDate[0]}).startOf('day')
+        if (d < d1){
             setToBookingDate(i=>fromBookingDate)
             setFromBookingDate(i=>newDate);
         }
@@ -80,12 +82,10 @@ const Widget = () => {
     const submitData = async(e:any)=>{
         e.preventDefault();
         // const d=await axios.get(`http://localhost:5000/flights/search/${fromCity}/${toCity}/${selected[0]}/${selected[1]}/${selected[2]}/${radioSelected}/${fromBookingDate}/${toBookingDate}`)
-        const d=await axios.post('http://localhost:5000/getFlightDetals',{
-            fromCity:fromCity,
-            toCity:toCity
-        });
-        console.log(d.data);
-        navigate(`/search`)
+        const detailRoute=`/search/${fromCity}/${toCity}/${selected[0]}/${selected[1]}/${selected[2]}/${fromBookingDate[0]+'-'+fromBookingDate[1]+'-'+fromBookingDate[2]}`;
+        const finalRoute=toBookingDate.length?detailRoute+`/${toBookingDate[0]+'-'+toBookingDate[1]+'-'+toBookingDate[2]}`:detailRoute;
+        navigate(finalRoute);
+
     }
 
     const handleOutsideClick = (e: any) => {

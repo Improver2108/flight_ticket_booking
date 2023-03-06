@@ -31,9 +31,8 @@ const Dates = ({ dateTime, fromDate,toDate,counter,selectDate}: any) => {
             dates.push(<div key={i} className="blackout-dates">{i}</div>)
         else{
             dates.push(<div key={i} className={isEqualDates([Date.year,Date.month,i])?'higlight-dates':
-            checkBetweenDates([Date.year,Date.month,i])?'middle-highlight-dates':''} 
- 
-            onClick={()=>selectDate([Date.year,Date.month,i])}>{i}</div>)
+                checkBetweenDates([Date.year,Date.month,i])?'middle-highlight-dates':''} 
+                onClick={()=>selectDate([Date.year,Date.month,i])}>{i}</div>)
         }            
     }
 
