@@ -6,10 +6,18 @@ import './Details.css';
 import { useLocation } from "react-router-dom";
 
 const Details=()=>{
-    const {state}:any=useLocation();  
+    const {state}:any=useLocation();
+    console.log(state)
     return(
     <div className="details">
-        <Widget/>
+        <Widget 
+            cityToStart={state.fromCity} 
+            cityToEnd={state.toCity} 
+            currentFromDate={state.fromBookingDate} 
+            currentToDate={state.toBookingDate} 
+            currentSelected={state.people}
+            currentRadioSelected={state.flightType}
+        />
         <div className="d-container">
             <Filter/>
             <Flights/>

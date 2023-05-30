@@ -15,7 +15,7 @@ app.get('/flights/search/:fromCity/:toCity/:adult/:child/:infant/:class/:fromDat
 })
 
 app.post('/getFlightDetals',jsonParser,(req:Request,res:Response)=>{
-    res.send(req.body)
+    res.send(req.body);
 })
 
 
